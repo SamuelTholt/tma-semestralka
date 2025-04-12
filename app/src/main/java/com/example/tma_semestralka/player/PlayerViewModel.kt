@@ -53,6 +53,39 @@ class PlayerViewModel(
                 val yellowCards = state.value.yellowCards
                 val redCards = state.value.redCards
                 val minutesPlayed = state.value.minutesPlayed
+
+                if (firstName.isBlank() || lastName.isBlank() || numberOfShirt <= 0 || position.isBlank() || goals < 0 || assists < 0
+                    || yellowCards < 0 || redCards < 0 || minutesPlayed < 0) {
+                    return
+                }
+
+                val player = Player(
+                    firstName = firstName,
+                    lastName = lastName,
+                    numberOfShirt = numberOfShirt,
+                    position = position,
+                    goals = goals,
+                    assists = assists,
+                    yellowCards = yellowCards,
+                    redCards = redCards,
+                    minutesPlayed = minutesPlayed
+                )
+
+                viewModelScope.launch {
+                    dao.insertPlayer(player)
+                }
+                _state.update { it.copy(
+                    firstName = "",
+                    lastName = "",
+                    numberOfShirt = 0,
+                    position = "",
+                    goals = 0,
+                    assists = 0,
+                    yellowCards = 0,
+                    redCards = 0,
+                    minutesPlayed = 0,
+                    isAddingPlayer = false,
+                ) }
             }
 
             is PlayerEvent.setAssists -> {

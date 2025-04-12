@@ -13,6 +13,5 @@ data class PlayerState(
     val redCards: Int = 0,
     val minutesPlayed: Int = 0,
     val isAddingPlayer: Boolean = false,
-    val error: String? = null,
     val sortType: SortTypePlayer = SortTypePlayer.BY_FIRST_NAME // Default sort type
 )
