@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">tma-semestralka</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="player_save">Uložiť</string>
+    <string name="player_name">Meno hráča</string>
+    <string name="player_lastName">Priezvisko hráča</string>
+    <string name="player_number">Číslo dresu</string>
+    <string name="player_position">Pozícia hráča</string>
+    <string name="player_goals">Počet gólov</string>
+    <string name="player_assists">Počet asistencií</string>
+    <string name="player_yellow">Počet žltých kariet</string>
+    <string name="player_red">Počet červených kariet</string>
+    <string name="player_minutes">Počet odohraných minút</string>
 </resources>

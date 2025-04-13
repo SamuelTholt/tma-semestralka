@@ -1,8 +1,11 @@
 package com.example.tma_semestralka.player
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "players")
 data class Player(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
@@ -15,4 +18,4 @@ data class Player(
     val yellowCards: Int,
     val redCards: Int,
     val minutesPlayed: Int
-)
+) : Parcelable
