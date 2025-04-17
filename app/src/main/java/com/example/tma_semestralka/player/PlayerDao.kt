@@ -24,4 +24,23 @@ interface PlayerDao {
 
     @Query("SELECT * FROM players")
     fun getAllPlayers() : Flow<List<Player>>
+
+    @Query("SELECT * FROM players WHERE id = :id")
+    suspend fun getPlayerById(id: Int): Player?
+
+    @Query("SELECT * FROM players WHERE firstName || ' ' || lastName LIKE '%' || :query || '%' ORDER BY lastName ASC")
+    fun searchPlayers(query: String): Flow<List<Player>>
+
+    @Query("SELECT * FROM players ORDER BY firstName ASC")
+    fun getPlayersSortedByFirstName(): Flow<List<Player>>
+
+    @Query("SELECT * FROM players ORDER BY lastName ASC")
+    fun getPlayersSortedByLastName(): Flow<List<Player>>
+
+    @Query("SELECT * FROM players ORDER BY numberOfShirt ASC")
+    fun getPlayersSortedByNumber(): Flow<List<Player>>
+
+    @Query("SELECT * FROM players ORDER BY position ASC")
+    fun getPlayersSortedByPosition(): Flow<List<Player>>
+
 }

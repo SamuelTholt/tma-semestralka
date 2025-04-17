@@ -6,21 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.tma_semestralka.AppDatabase
+import com.example.tma_semestralka.R
 import com.example.tma_semestralka.databinding.FragmentPlayerBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
 class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
-    PlayerDetailsAdapter.PlayerDetailsClickListener {
+    PlayersAdapter.PlayerDetailsClickListener {
 
     private var _binding: FragmentPlayerBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: PlayerDetailsAdapter
+    private lateinit var adapter: PlayersAdapter
     private var dao: PlayerDao? = null
 
 
@@ -42,7 +44,7 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
     }
 
     private fun initRecyclerView() {
-        adapter = PlayerDetailsAdapter(this)
+        adapter = PlayersAdapter(this)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
@@ -84,6 +86,11 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
         lifecycleScope.launch(Dispatchers.IO) {
             dao?.deletePlayerById(player.id)
         }
+    }
+
+    override fun onInfoPlayerClick(player: Player) {
+        val action = PlayerFragmentDirections.actionPlayerFragmentToPlayerInfoFragment(player.id)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

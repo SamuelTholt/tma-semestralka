@@ -16,7 +16,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="150dp"
         android:layout_marginTop="70dp"
-        tools:listitem="@layout/single_item" />
+        tools:listitem="@layout/player_item_row" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -25,8 +25,8 @@
         android:backgroundTint="@color/color0ef6cc"
         app:fabSize="auto"
         app:layout_anchor="@id/bottom_app_bar"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:tint="@color/white"
+        app:srcCompat="@drawable/add_player_icon"
+        app:tint="@color/black"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <com.google.android.material.bottomappbar.BottomAppBar

@@ -36,4 +36,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
+androidx-navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version = "2.8.9" }
+
 

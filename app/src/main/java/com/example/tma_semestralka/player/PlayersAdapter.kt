@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tma_semestralka.databinding.SingleItemBinding
+import com.example.tma_semestralka.databinding.PlayerItemRowBinding
 
-class PlayerDetailsAdapter(private val listener: PlayerDetailsClickListener) : ListAdapter<Player, PlayerDetailsAdapter.PlayerDetailsViewHolder>(DiffUtilCallback()) {
+class PlayersAdapter(private val listener: PlayerDetailsClickListener) : ListAdapter<Player, PlayersAdapter.PlayerDetailsViewHolder>(DiffUtilCallback()) {
 
-    inner class PlayerDetailsViewHolder(private val binding: SingleItemBinding) :
+    inner class PlayerDetailsViewHolder(private val binding: PlayerItemRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -20,6 +20,10 @@ class PlayerDetailsAdapter(private val listener: PlayerDetailsClickListener) : L
             binding.deleteBtn.setOnClickListener {
                 listener.onDeletePlayerClick(getItem(adapterPosition))
             }
+
+            binding.infoBtn.setOnClickListener {
+                listener.onInfoPlayerClick(getItem(adapterPosition))
+            }
         }
 
         @SuppressLint("SetTextI18n")
@@ -28,11 +32,6 @@ class PlayerDetailsAdapter(private val listener: PlayerDetailsClickListener) : L
             binding.lastNameTv.text = player.lastName
             binding.numberOfShirtTv.text = player.numberOfShirt.toString()
             binding.positionTv.text = player.position
-            binding.goalsTv.text = player.goals.toString()
-            binding.assistsTv.text = player.assists.toString()
-            binding.yellowCardsTv.text = player.yellowCards.toString()
-            binding.redCardsTv.text = player.redCards.toString()
-            binding.minutesPlayedTv.text = player.minutesPlayed.toString()
         }
     }
 
@@ -43,7 +42,7 @@ class PlayerDetailsAdapter(private val listener: PlayerDetailsClickListener) : L
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerDetailsViewHolder {
-        return PlayerDetailsViewHolder(SingleItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return PlayerDetailsViewHolder(PlayerItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: PlayerDetailsViewHolder, position: Int) {
@@ -53,5 +52,6 @@ class PlayerDetailsAdapter(private val listener: PlayerDetailsClickListener) : L
     interface PlayerDetailsClickListener {
         fun onEditPlayerClick(player: Player)
         fun onDeletePlayerClick(player: Player)
+        fun onInfoPlayerClick(player: Player)
     }
 }
