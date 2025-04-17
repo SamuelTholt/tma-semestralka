@@ -5,11 +5,9 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tma_semestralka.R
 import com.example.tma_semestralka.databinding.FragmentAddEditPlayerBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -22,7 +20,13 @@ class AddEditPlayerFragment : BottomSheetDialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as AddEditPlayerListener
+        val target = targetFragment
+        if (target is AddEditPlayerListener) {
+            listener = target
+        } else {
+            Log.e(TAG, "Target fragment does not implement AddEditPlayerListener")
+            throw ClassCastException("Target fragment must implement AddEditPlayerListener")
+        }
     }
 
     override fun onCreateView(
