@@ -1,33 +1,34 @@
 package com.example.tma_semestralka.player
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.example.tma_semestralka.AppDatabase
-import com.example.tma_semestralka.databinding.FragmentPlayersBinding
+import com.example.tma_semestralka.databinding.FragmentPlayerBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 @Suppress("DEPRECATION")
-class PlayersFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
+class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
     PlayerDetailsAdapter.PlayerDetailsClickListener {
 
-    private var _binding: FragmentPlayersBinding? = null
+    private var _binding: FragmentPlayerBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: PlayerDetailsAdapter
     private var dao: PlayerDao? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPlayersBinding.inflate(inflater, container, false)
+        _binding = FragmentPlayerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,6 +54,12 @@ class PlayersFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
         }
     }
 
+    private fun showBottomSheet(player: Player? = null) {
+        val bottomSheet = AddEditPlayerFragment.newInstance(player)
+        bottomSheet.setTargetFragment(this, 0)
+        bottomSheet.show(parentFragmentManager, AddEditPlayerFragment.TAG)
+    }
+
     private fun observePlayers() {
         lifecycleScope.launch {
             dao?.getAllPlayers()?.collect { players ->
@@ -60,13 +67,6 @@ class PlayersFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
             }
         }
     }
-
-    private fun showBottomSheet(player: Player? = null) {
-        val bottomSheet = AddEditPlayerFragment.newInstance(player)
-        bottomSheet.setTargetFragment(this, 0)
-        bottomSheet.show(parentFragmentManager, AddEditPlayerFragment.TAG)
-    }
-
     override fun onSaveBtnClicked(isUpdate: Boolean, player: Player) {
         lifecycleScope.launch(Dispatchers.IO) {
             if (isUpdate)

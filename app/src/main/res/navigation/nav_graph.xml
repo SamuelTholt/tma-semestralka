@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/playersFragment">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/playerFragment">
     <fragment
-        android:id="@+id/playersFragment"
-        android:name="com.example.tma_semestralka.player.PlayersFragment"
-        android:label="Zostava" />
+        android:id="@+id/playerFragment"
+        android:name="com.example.tma_semestralka.player.PlayerFragment"
+        android:label="Súpiska"
+        tools:layout="@layout/fragment_player" />
 </navigation>
