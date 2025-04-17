@@ -13,4 +13,5 @@
     <string name="player_yellow">Počet žltých kariet</string>
     <string name="player_red">Počet červených kariet</string>
     <string name="player_minutes">Počet odohraných minút</string>
+    <string name="zostava">Zostava</string>
 </resources>
