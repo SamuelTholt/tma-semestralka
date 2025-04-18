@@ -34,9 +34,15 @@ class MainActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
-        val menu = binding.navigationView.menu
-        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
-        menu.findItem(R.id.nav_logout).isVisible = isAdmin
+
+        val navView = binding.navigationView
+        navView.menu.clear()
+
+        if (isAdmin) {
+            navView.inflateMenu(R.menu.nav_admin_menu)
+        } else {
+            navView.inflateMenu(R.menu.nav_guest_menu)
+        }
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -44,14 +50,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_admin_login -> navController.navigate(R.id.adminLoginFragment)
                 R.id.nav_logout -> {
                     prefs.edit().putBoolean("isAdminLoggedIn", false).apply()
-                    Log.d("ADMIN", prefs.getBoolean("isAdminLoggedIn", false).toString())
-                    binding.navigationView.menu.findItem(R.id.nav_admin_login).isVisible = true
-                    binding.navigationView.menu.findItem(R.id.nav_logout).isVisible = false
-                    navController.navigate(R.id.adminLoginFragment)
+                    reloadNavigationMenu()
+                    navController.navigate(R.id.playerFragment)
                 }
                 R.id.nav_exit -> finish()
             }
-            // Zatvorenie Drawer menu po kliknutí
             binding.drawerLayout.closeDrawers()
             true
         }
@@ -71,12 +74,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun updateNavigationMenu() {
+    fun reloadNavigationMenu() {
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
 
-        val menu = binding.navigationView.menu
-        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
-        menu.findItem(R.id.nav_logout).isVisible = isAdmin
+        val navView = binding.navigationView
+        navView.menu.clear()
+
+        if (isAdmin) {
+            navView.inflateMenu(R.menu.nav_admin_menu)
+        } else {
+            navView.inflateMenu(R.menu.nav_guest_menu)
+        }
     }
+
 }

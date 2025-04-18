@@ -65,7 +65,7 @@ class AdminLoginFragment : Fragment() {
                         sharedPref.edit().putBoolean("isAdminLoggedIn", true).apply()
 
                         Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
-                        (activity as? MainActivity)?.updateNavigationMenu()
+                        (activity as? MainActivity)?.reloadNavigationMenu()
                         findNavController().navigateUp()
                     } else {
                         Toast.makeText(requireContext(), "Incorrect password", Toast.LENGTH_SHORT).show()
