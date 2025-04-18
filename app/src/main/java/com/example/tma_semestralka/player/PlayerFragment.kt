@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,8 @@ import com.example.tma_semestralka.AppDatabase
 import com.example.tma_semestralka.R
 import com.example.tma_semestralka.databinding.FragmentPlayerBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
@@ -24,6 +27,10 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
 
     private lateinit var adapter: PlayersAdapter
     private var dao: PlayerDao? = null
+
+    private var currentSort: String = "Číslo"
+    private var currentQuery: String = ""
+    private var searchJob: Job? = null
 
 
     override fun onCreateView(
@@ -41,6 +48,35 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
         initRecyclerView()
         attachListeners()
         observePlayers()
+
+        setupSearchView()
+
+        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                currentSort = parent.getItemAtPosition(position).toString()
+                observePlayers()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchJob?.cancel()
+                searchJob = lifecycleScope.launch {
+                    delay(300)
+                    currentQuery = newText.orEmpty()
+                    observePlayers()
+                }
+                return true
+            }
+        })
     }
 
     private fun initRecyclerView() {
@@ -64,8 +100,23 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
 
     private fun observePlayers() {
         lifecycleScope.launch {
-            dao?.getAllPlayers()?.collect { players ->
-                adapter.submitList(players)
+            when {
+                currentQuery.isNotEmpty() -> {
+                    dao?.searchPlayers(currentQuery)?.collect { players ->
+                        adapter.submitList(players)
+                    }
+                }
+                else -> {
+                    when (currentSort) {
+                        "Číslo" -> dao?.getPlayersSortedByNumber()
+                        "Meno" -> dao?.getPlayersSortedByFirstName()
+                        "Priezvisko" -> dao?.getPlayersSortedByLastName()
+                        "Pozícia" -> dao?.getPlayersSortedByPosition()
+                        else -> dao?.getAllPlayers()
+                    }?.collect { players ->
+                        adapter.submitList(players)
+                    }
+                }
             }
         }
     }
