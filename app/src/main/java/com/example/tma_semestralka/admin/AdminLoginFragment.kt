@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.example.tma_semestralka.AppDatabase
+import com.example.tma_semestralka.MainActivity
 import com.example.tma_semestralka.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,6 +65,7 @@ class AdminLoginFragment : Fragment() {
                         sharedPref.edit().putBoolean("isAdminLoggedIn", true).apply()
 
                         Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
+                        (activity as? MainActivity)?.updateNavigationMenu()
                         findNavController().navigateUp()
                     } else {
                         Toast.makeText(requireContext(), "Incorrect password", Toast.LENGTH_SHORT).show()

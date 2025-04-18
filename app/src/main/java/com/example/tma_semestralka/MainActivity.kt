@@ -1,6 +1,7 @@
 package com.example.tma_semestralka
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,17 +14,6 @@ import com.example.tma_semestralka.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    override fun onResume() {
-        super.onResume()
-
-        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
-
-        val menu = binding.navigationView.menu
-        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
-        menu.findItem(R.id.nav_logout).isVisible = isAdmin
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +43,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_players -> navController.navigate(R.id.playerFragment)
                 R.id.nav_admin_login -> navController.navigate(R.id.adminLoginFragment)
                 R.id.nav_logout -> {
-                    prefs.edit().clear().apply()
+                    prefs.edit().putBoolean("isAdminLoggedIn", false).apply()
+                    Log.d("ADMIN", prefs.getBoolean("isAdminLoggedIn", false).toString())
+                    binding.navigationView.menu.findItem(R.id.nav_admin_login).isVisible = true
+                    binding.navigationView.menu.findItem(R.id.nav_logout).isVisible = false
+                    navController.navigate(R.id.adminLoginFragment)
                 }
                 R.id.nav_exit -> finish()
             }
@@ -75,5 +69,14 @@ class MainActivity : AppCompatActivity() {
             val isAdminNow = prefs.getBoolean("isAdminLoggedIn", false)
             supportActionBar?.title = if (isAdminNow) "${destination.label} [Admin]" else "${destination.label}"
         }
+    }
+
+    fun updateNavigationMenu() {
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
+
+        val menu = binding.navigationView.menu
+        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
+        menu.findItem(R.id.nav_logout).isVisible = isAdmin
     }
 }
