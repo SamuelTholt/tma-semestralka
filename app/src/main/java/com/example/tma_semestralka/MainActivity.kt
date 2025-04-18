@@ -4,11 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
+
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+
 import androidx.navigation.ui.setupWithNavController
 import com.example.tma_semestralka.databinding.ActivityMainBinding
 
@@ -16,8 +14,20 @@ import com.example.tma_semestralka.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    override fun onResume() {
+        super.onResume()
+
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
+
+        val menu = binding.navigationView.menu
+        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
+        menu.findItem(R.id.nav_logout).isVisible = isAdmin
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -32,10 +42,20 @@ class MainActivity : AppCompatActivity() {
         // Prepojenie NavigationView s NavigationControllerom
         binding.navigationView.setupWithNavController(navController)
 
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val isAdmin = prefs.getBoolean("isAdminLoggedIn", false)
+        val menu = binding.navigationView.menu
+        menu.findItem(R.id.nav_admin_login).isVisible = !isAdmin
+        menu.findItem(R.id.nav_logout).isVisible = isAdmin
+
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_players -> navController.navigate(R.id.playerFragment)
-                R.id.nav_exit -> finish() // Ukončí aplikáciu
+                R.id.nav_admin_login -> navController.navigate(R.id.adminLoginFragment)
+                R.id.nav_logout -> {
+                    prefs.edit().clear().apply()
+                }
+                R.id.nav_exit -> finish()
             }
             // Zatvorenie Drawer menu po kliknutí
             binding.drawerLayout.closeDrawers()
@@ -52,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            supportActionBar?.title = "${destination.label}"
+            val isAdminNow = prefs.getBoolean("isAdminLoggedIn", false)
+            supportActionBar?.title = if (isAdminNow) "${destination.label} [Admin]" else "${destination.label}"
         }
     }
 }

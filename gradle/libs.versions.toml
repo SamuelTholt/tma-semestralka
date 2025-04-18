@@ -29,6 +29,7 @@ androidx-room-runtime-compiler  = { module = "androidx.room:room-compiler", vers
 androidx-room-ktx = { module = "androidx.room:room-ktx", version = "2.7.0"}
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+bcrypt = { group = "at.favre.lib", name = "bcrypt", version = "0.9.0" }
 
 
 [plugins]

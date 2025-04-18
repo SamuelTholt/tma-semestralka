@@ -3,12 +3,15 @@ package com.example.tma_semestralka.player
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tma_semestralka.databinding.PlayerItemRowBinding
 
-class PlayersAdapter(private val listener: PlayerDetailsClickListener) : ListAdapter<Player, PlayersAdapter.PlayerDetailsViewHolder>(DiffUtilCallback()) {
+class PlayersAdapter(private val listener: PlayerDetailsClickListener,
+    private val isAdmin: Boolean)
+    : ListAdapter<Player, PlayersAdapter.PlayerDetailsViewHolder>(DiffUtilCallback()) {
 
     inner class PlayerDetailsViewHolder(private val binding: PlayerItemRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,6 +35,14 @@ class PlayersAdapter(private val listener: PlayerDetailsClickListener) : ListAda
             binding.lastNameTv.text = player.lastName
             binding.numberOfShirtTv.text = player.numberOfShirt.toString()
             binding.positionTv.text = player.position
+
+            if(isAdmin) {
+                binding.editBtn.visibility = ViewGroup.VISIBLE
+                binding.deleteBtn.visibility = ViewGroup.VISIBLE
+            } else {
+                binding.editBtn.visibility = ViewGroup.GONE
+                binding.deleteBtn.visibility = ViewGroup.GONE
+            }
         }
     }
 

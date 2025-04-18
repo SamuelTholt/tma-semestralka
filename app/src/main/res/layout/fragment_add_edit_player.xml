@@ -183,7 +183,8 @@
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:inputType="number"
-                android:hint="@string/player_assists" />
+                android:hint="@string/player_assists"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

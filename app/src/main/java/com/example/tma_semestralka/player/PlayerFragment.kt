@@ -1,5 +1,6 @@
 package com.example.tma_semestralka.player
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.tma_semestralka.AppDatabase
-import com.example.tma_semestralka.R
 import com.example.tma_semestralka.databinding.FragmentPlayerBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,6 +32,8 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
     private var currentQuery: String = ""
     private var searchJob: Job? = null
 
+    private var isAdmin: Boolean = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +46,15 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPref = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        isAdmin = sharedPref.getBoolean("isAdminLoggedIn", false)
+
         dao = AppDatabase.getDatabase(requireContext()).playerDao()
         initRecyclerView()
         attachListeners()
         observePlayers()
+
+        binding.floatingActionButton.visibility = if (isAdmin) View.VISIBLE else View.GONE
 
         setupSearchView()
 
@@ -80,7 +87,7 @@ class PlayerFragment : Fragment(), AddEditPlayerFragment.AddEditPlayerListener,
     }
 
     private fun initRecyclerView() {
-        adapter = PlayersAdapter(this)
+        adapter = PlayersAdapter(this, isAdmin)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter

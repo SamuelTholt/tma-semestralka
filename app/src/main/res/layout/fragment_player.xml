@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bck_color_1B2223"
-    tools:context=".MainActivity">
+    tools:context=".player.PlayerFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -79,7 +79,8 @@
                 android:layout_marginStart="50dp"
                 android:src="@android:drawable/ic_menu_sort_by_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <Spinner
                 android:id="@+id/sortSpinner"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/nav_players"
@@ -9,4 +10,17 @@
         android:id="@+id/nav_exit"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/exit_app" />
+    <item
+        android:id="@+id/nav_separator"
+        android:title="--------------------"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/nav_admin_login"
+        android:icon="@drawable/login_icon"
+        android:title="@string/admin_login" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/logout_icon"
+        android:title="Odhlásiť sa"
+        tools:ignore="HardcodedText" />
 </menu>

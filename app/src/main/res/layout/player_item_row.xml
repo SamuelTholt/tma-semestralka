@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="127dp"
-        android:padding="10dp">
+        android:padding="10dp"
+        tools:ignore="TextSizeCheck">
 
         <ImageView
             android:id="@+id/img_name"
@@ -21,7 +22,8 @@
             android:layout_height="19dp"
             android:src="@drawable/name_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/firstNameTv"
@@ -32,7 +34,8 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/img_name"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
 
         <ImageView
@@ -41,7 +44,8 @@
             android:layout_height="19dp"
             android:src="@drawable/lastname_icon"
             app:layout_constraintStart_toEndOf="@+id/firstNameTv"
-            app:layout_constraintTop_toTopOf="@+id/firstNameTv" />
+            app:layout_constraintTop_toTopOf="@+id/firstNameTv"
+            tools:ignore="ContentDescription" />
 
 
         <TextView
@@ -54,7 +58,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_lastname"
-            app:layout_constraintTop_toTopOf="@+id/firstNameTv" />
+            app:layout_constraintTop_toTopOf="@+id/firstNameTv"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/img_number"
@@ -63,7 +68,8 @@
             android:layout_marginTop="52dp"
             android:src="@drawable/football_jersey_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_name" />
+            app:layout_constraintTop_toBottomOf="@+id/img_name"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/numberOfShirtTv"
@@ -75,7 +81,8 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/img_number"
-            app:layout_constraintTop_toBottomOf="@id/firstNameTv" />
+            app:layout_constraintTop_toBottomOf="@id/firstNameTv"
+            tools:ignore="HardcodedText" />
 
 
         <ImageView
@@ -84,7 +91,8 @@
             android:layout_height="19dp"
             android:src="@drawable/position_icon"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/numberOfShirtTv" />
+            app:layout_constraintTop_toTopOf="@+id/numberOfShirtTv"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/positionTv"
@@ -96,7 +104,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_position"
-            app:layout_constraintTop_toTopOf="@+id/numberOfShirtTv" />
+            app:layout_constraintTop_toTopOf="@+id/numberOfShirtTv"
+            tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -120,7 +129,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/deleteBtn"
@@ -130,7 +140,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/infoBtn"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/infoBtn"
@@ -140,7 +151,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editBtn"
-            app:srcCompat="@android:drawable/ic_menu_info_details" />
+            app:srcCompat="@android:drawable/ic_menu_info_details"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

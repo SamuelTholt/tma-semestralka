@@ -19,4 +19,5 @@
     <string name="supiska">Súpiska</string>
     <string name="exit_app">Ukonči aplikáciu</string>
     <string name="n_vrat_na_s_pisku">Návrat na súpisku</string>
+    <string name="admin_login">Admin Login</string>
 </resources>

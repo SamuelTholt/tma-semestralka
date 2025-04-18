@@ -61,6 +61,11 @@ dependencies {
     kapt(libs.androidx.room.runtime.compiler)        // Room Compiler
     implementation(libs.androidx.room.ktx)    // Room KTX
 
+
+
+    implementation(libs.bcrypt)
+
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
