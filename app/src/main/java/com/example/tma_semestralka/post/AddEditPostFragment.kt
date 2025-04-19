@@ -1,60 +1,95 @@
 package com.example.tma_semestralka.post
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tma_semestralka.R
+import com.example.tma_semestralka.databinding.FragmentAddEditPostBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@Suppress("DEPRECATION")
+class AddEditPostFragment : BottomSheetDialogFragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddEditPostFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AddEditPostFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentAddEditPostBinding
+    private var listener : AddEditPostListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var post: Post? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentAddEditPostBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val target = targetFragment
+        if (target is AddEditPostListener) {
+            listener = target
+        } else {
+            Log.e(TAG, "Target fragment does not implement AddEditPostListener")
+            throw ClassCastException("Target fragment must implement AddEditPostListener")
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_edit_post, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (arguments != null) {
+            post = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                arguments?.getParcelable("post", Post::class.java)
+            else
+                arguments?.getParcelable("post")
+        }
+        post?.let { setExistingDataOnUi(it) }
+        attachUiListener()
+    }
+
+    private fun attachUiListener() {
+        binding.saveBtn.setOnClickListener {
+            val postHeader = binding.postHeaderEditText.text.toString()
+            val postText = binding.postTexteEditText.text.toString()
+
+            if (postHeader.isNotEmpty() && postText.isNotEmpty()) {
+                val post1 = Post(
+                    post?.id ?: 0, postHeader, postText
+                )
+
+                Log.d("PostData", "Saving post: $post1")
+                listener?.onSaveBtnClicked(post != null, post1)
+            }
+            dismiss()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setExistingDataOnUi(post: Post) {
+        binding.postHeaderEditText.setText(post.postHeader)
+        binding.postTexteEditText.setText(post.postText)
+
+        binding.saveBtn.text = "Update"
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddEditPostFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+        const val TAG = "AddEditPostFragment"
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddEditPostFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(post: Post?) = AddEditPostFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("post", post)
             }
+        }
     }
+
+    interface AddEditPostListener {
+        fun onSaveBtnClicked(isUpdate: Boolean, post: Post)
+    }
+
 }

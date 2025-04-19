@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/post_text"
+                android:maxLength="700"
                 android:textColor="@color/color_white_f4fefd"
                 app:boxBackgroundColor="@color/color3a4f50"
                 tools:ignore="VisualLintTextFieldSize" />

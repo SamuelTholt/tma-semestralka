@@ -7,6 +7,11 @@
         <item>Pozícia</item>
     </string-array>
 
+    <string-array name="sort_options_post">
+        <item>Vzostupne</item>
+        <item>Zostupne</item>
+    </string-array>
+
     <string-array name="player_positions">
         <item>Brankár</item>
         <item>Obranca</item>

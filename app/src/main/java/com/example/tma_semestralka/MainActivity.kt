@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_players -> navController.navigate(R.id.playerFragment)
+                R.id.nav_posts -> navController.navigate(R.id.postFragment)
                 R.id.nav_admin_login -> navController.navigate(R.id.adminLoginFragment)
                 R.id.nav_logout -> {
                     prefs.edit().putBoolean("isAdminLoggedIn", false).apply()

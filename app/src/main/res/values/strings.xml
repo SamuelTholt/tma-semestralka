@@ -23,4 +23,5 @@
 
     <string name="post_header">Nadpis príspevku</string>
     <string name="post_text">Text príspevku</string>
+    <string name="post">Príspevky</string>
 </resources>

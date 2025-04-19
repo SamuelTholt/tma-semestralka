@@ -7,6 +7,10 @@
         android:icon="@drawable/supiska_icon"
         android:title="@string/supiska" />
     <item
+        android:id="@+id/nav_posts"
+        android:title="@string/post"
+        android:icon="@drawable/post_icon" />
+    <item
         android:id="@+id/nav_exit"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/exit_app" />

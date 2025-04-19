@@ -31,4 +31,9 @@
         android:name="com.example.tma_semestralka.admin.AdminLoginFragment"
         android:label="@string/admin_login"
         tools:layout="@layout/fragment_admin_login" />
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.tma_semestralka.post.PostFragment"
+        android:label="Príspevky"
+        tools:layout="@layout/fragment_post" />
 </navigation>

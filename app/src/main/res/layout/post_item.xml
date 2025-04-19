@@ -90,7 +90,7 @@
             android:layout_marginTop="0dp"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.7"
-            app:layout_constraintTop_toBoOf="@id/postTextTv" />
+            app:layout_constraintTop_toBottomOf="@id/postTextTv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

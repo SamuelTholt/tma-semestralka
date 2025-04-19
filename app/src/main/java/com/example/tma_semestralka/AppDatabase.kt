@@ -11,16 +11,19 @@ import com.example.tma_semestralka.admin.AdminDao
 import com.example.tma_semestralka.admin.AdminEntity
 import com.example.tma_semestralka.player.Player
 import com.example.tma_semestralka.player.PlayerDao
+import com.example.tma_semestralka.post.Post
+import com.example.tma_semestralka.post.PostDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [Player::class, AdminEntity::class], version = 1)
+@Database(entities = [Player::class, AdminEntity::class, Post::class], version = 2)
 abstract class AppDatabase() : RoomDatabase() {
 
     abstract fun playerDao() : PlayerDao
     abstract fun adminDao() : AdminDao
+    abstract fun postDao() : PostDao
 
     companion object {
         @Volatile
@@ -54,6 +57,7 @@ abstract class AppDatabase() : RoomDatabase() {
                             }
                         }
                     })
+                    .fallbackToDestructiveMigration(true)
                     .build()
                     INSTANCE = instance
                     return instance
