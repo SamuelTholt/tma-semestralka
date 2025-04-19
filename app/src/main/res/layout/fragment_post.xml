@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bck_color_1B2223"
-    tools:context=".player.PlayerFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="140dp">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/rounded_edit_text"
-            android:queryBackground="@android:color/transparent"
-            app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
-            app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:queryHint="Hľadaj hráča..."
-            app:searchIcon="@android:drawable/ic_search_category_default" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    tools:context=".post.PostFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -39,7 +17,7 @@
         android:clipToPadding="false"
         android:paddingTop="10dp"
         android:paddingBottom="150dp"
-        tools:listitem="@layout/player_item_row" />
+        tools:listitem="@layout/post_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -51,7 +29,7 @@
         app:layout_anchor="@id/bottom_app_bar"
         app:layout_anchorGravity="center"
         app:fabSize="auto"
-        app:srcCompat="@drawable/add_player_icon"
+        app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@color/black"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
@@ -96,5 +74,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

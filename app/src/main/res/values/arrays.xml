@@ -6,4 +6,11 @@
         <item>Priezvisko</item>
         <item>Pozícia</item>
     </string-array>
+
+    <string-array name="player_positions">
+        <item>Brankár</item>
+        <item>Obranca</item>
+        <item>Záložník</item>
+        <item>Útočník</item>
+    </string-array>
 </resources>

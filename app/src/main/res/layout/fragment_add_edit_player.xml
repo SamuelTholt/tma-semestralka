@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    android:background="@color/bck_color_1B2223"
     tools:context="player.AddEditPlayerFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/bck_color_1B2223">
+        android:background="@color/bck_color_1B2223"
+        android:padding="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/playerFirstNameInputLayout"
@@ -39,7 +38,8 @@
                 android:hint="@string/player_name"
                 android:maxLines="1"
                 android:textColor="@color/color_white_f4fefd"
-                app:boxBackgroundColor="@color/color3a4f50" />
+                app:boxBackgroundColor="@color/color3a4f50"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,13 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +63,13 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/playerLastNameEditText"
-                app:boxBackgroundColor="@color/color3a4f50"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_lastName"
                 android:maxLines="1"
                 android:textColor="@color/color_white_f4fefd"
-                android:hint="@string/player_lastName" />
+                app:boxBackgroundColor="@color/color3a4f50"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -77,14 +78,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,10 +95,11 @@
                 android:id="@+id/playerNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_number"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:inputType="number"
-                android:hint="@string/player_number" />
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -120,14 +122,14 @@
             app:layout_constraintTop_toBottomOf="@id/playerNumberInputLayout">
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/playerPositionEditText"
+            <Spinner
+                android:id="@+id/position_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/player_position"
-                android:maxLines="1"
-                android:textColor="@color/color_white_f4fefd"
-                app:boxBackgroundColor="@color/color3a4f50" />
+                android:layout_height="48dp"
+                android:background="@color/color3a4f50"
+                android:contextClickable="true"
+                android:entries="@array/player_positions"
+                android:spinnerMode="dialog" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -135,14 +137,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,10 +154,11 @@
                 android:id="@+id/playerGoalsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_goals"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:inputType="number"
-                android:hint="@string/player_goals" />
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -163,14 +166,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,10 +183,10 @@
                 android:id="@+id/playerAssistsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_assists"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:inputType="number"
-                android:hint="@string/player_assists"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,14 +195,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +216,7 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                tools:ignore="DuplicateClickableBoundsCheck" />
+                tools:ignore="DuplicateClickableBoundsCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -222,14 +225,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -239,10 +242,11 @@
                 android:id="@+id/playerRedCardsEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_red"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:inputType="number"
-                android:hint="@string/player_red" />
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -250,14 +254,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColorHint="@color/color_white_f4fefd"
+            app:boxBackgroundColor="@color/color3a4f50"
+            app:boxStrokeColor="@color/white"
             app:boxStrokeWidth="2dp"
             app:boxStrokeWidthFocused="2dp"
             app:cursorColor="@color/white"
-            android:layout_marginTop="16dp"
-            app:boxBackgroundColor="@color/color3a4f50"
-            android:textColorHint="@color/color_white_f4fefd"
             app:hintTextColor="@color/color_white_f4fefd"
-            app:boxStrokeColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -267,10 +271,11 @@
                 android:id="@+id/playerMinutesEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/player_minutes"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textColor="@color/white"
-                android:inputType="number"
-                android:hint="@string/player_minutes" />
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
